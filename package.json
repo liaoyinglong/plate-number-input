@@ -1,0 +1,36 @@
+{
+  "name": "plate-number-input",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open   --port 9090",
+    "dev": "webpack-dev-server --mode development --open --port 9090",
+    "build": "webpack --mode development"
+  },
+  "main": "index.js",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.25.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "@types/node": "^9.6.1",
+    "babel-loader": "^8.0.0-beta.2",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-lodash": "^3.3.2",
+    "babel-plugin-ramda": "^1.5.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "html-webpack-plugin": "^3.1.0",
+    "stylus": "^0.54.5",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1"
+  },
+  "description": "",
+  "author": "",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

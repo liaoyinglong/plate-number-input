@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+</body>
+<script>
+  const log = (env => thing => env === 'dev' ? console.log(thing) : '')('dev')
+
+
+  const input = new plateNumberInput({
+    el: '#app',
+    defaultNumber: '粤B11111',
+    defaultNumberType: 'common', // 对应普通车   newPower
+  })
+
+  log('input 对象')
+  log(input)
+
+  log('获取当前输入车牌')
+  log(input.getNumber())
+
+  log('获取当前车牌类型')
+  log(input.getNumberType())
+
+  log('设置默认车牌号')
+  input.setDefaultNumber('粤A3RHKT')
+
+
+</script>
+
+</html>
