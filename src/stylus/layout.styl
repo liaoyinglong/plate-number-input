@@ -1,0 +1,15 @@
+
+disflex(direction = column, inline = false, justifyContent = normal)
+  if (inline)
+    display inline-flex
+  else
+    display flex
+
+  flex-direction direction
+  flex-wrap wrap
+  justify-content justifyContent
+
+/* 键盘置于底部 */
+stackyfooters()
+  position absolute
+  bottom 0

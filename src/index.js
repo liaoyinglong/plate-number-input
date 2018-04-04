@@ -5,6 +5,8 @@ import layout from './config/layout'
 import rule from './config/rule'
 import defaultOptions from './config/defaultOptions'
 
+import './stylus/index.styl'
+
 export default class plateNumberInput {
   constructor(options) {
     this.options = R.merge(defaultOptions, options)
@@ -53,16 +55,15 @@ export default class plateNumberInput {
   _generateKeyboard() {
     const currentKeyboardIndex = this.active && 1
     const currentKeyboard = layout.keyboard[currentKeyboardIndex]
-    let html = currentKeyboard.map(items => {
-      let row = items
-        .map(item => {
-          let classList = this.disableRule.includes(item) ? this._prefix('disable') : ''
-          return `<span class="${this._prefix('item') + classList}">${item}</span>`
-        })
-        .join('')
+    const generatekey = R.map(item => {
+      let classList = this.disableRule.includes(item) ? this._prefix('disable') : ''
+      return `<span class="${this._prefix('item') + classList}">${item}</span>`
+    })
+    const combinationRow = R.map(items => {
+      let row = generatekey(items).join('')
       return `<div class="${this._prefix('row')}">${row}</div>`
     })
-    this.keyboardWrapper.innerHTML = html.join('')
+    this.keyboardWrapper.innerHTML = combinationRow(currentKeyboard).join('')
   }
   _prefix(str) {
     return `keyboard-${str} `

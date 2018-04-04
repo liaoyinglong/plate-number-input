@@ -1,0 +1,64 @@
+@import './reset.styl'
+@import './layout.styl'
+
+#inputboxWrapper
+  background-color #000000
+  height 15.6rem
+  background-image linear-gradient(rgb(39, 53, 66), rgb(27, 36, 45))
+  box-sizing border-box
+  padding-top 2.987rem
+
+  .container-middle
+    disflex(row, false, space-between)
+    height 2.7rem
+    width 86%
+    position relative
+    left 0
+    right 0
+    margin 0 auto
+
+    span
+      display block
+      text-align center
+      line-height 2.7rem
+      font-size 1.068rem
+      color #dee5eb
+      height 100%
+      flex 1
+      border 1px solid rgb(175, 175, 175)
+      border-right 0
+      box-sizing border-box
+
+    span:first-child
+      border-radius 6px 0 0 6px
+
+    span:last-child
+      border-radius 0px 6px 6px 0px
+      border-right 1px solid rgb(175, 175, 175)
+
+  .container-bottom
+    width 90%
+    height 2.56rem
+    position relative
+    margin 2.56rem auto 0
+
+    .btnbind
+      display block
+      width 100%
+      height 100%
+      text-align center
+      line-height 2.56rem
+      border-radius 6px
+      background-color #f0e6ac
+      color #5c5426
+      font-size 0.91rem
+
+      &.active
+        background-color rgb(246, 207, 7)
+
+#keyboardWrapper
+  stackyfooters()
+
+  .keyboard-row
+    width 100vw
+    disflex(row, false, space-around)
