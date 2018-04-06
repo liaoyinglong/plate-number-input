@@ -1,6 +1,9 @@
 @import './reset.styl'
 @import './layout.styl'
 
+inputFoucs = rgb(246, 210, 11)
+inputSpanBorderColor = rgb(175, 175, 175)
+
 #inputboxWrapper
   background-color #000000
   height 15.6rem
@@ -23,16 +26,25 @@
       color #dee5eb
       height 100%
       flex 1
-      border 1px solid rgb(175, 175, 175)
+      border 1px solid inputSpanBorderColor
       border-right 0
       box-sizing border-box
 
-    span:first-child
-      border-radius 6px 0 0 6px
+      &.focus
+        border-color inputFoucs
 
-    span:last-child
-      border-radius 0px 6px 6px 0px
-      border-right 1px solid rgb(175, 175, 175)
+        & + span
+          border-left-color inputFoucs
+
+      &:first-child
+        border-radius 6px 0 0 6px
+
+      &:last-child
+        border-radius 0px 6px 6px 0px
+        border-right 1px solid inputSpanBorderColor
+
+        &.focus
+          border-right-color inputFoucs
 
   .container-save-button
     width 90%

@@ -1,5 +1,3 @@
-import R from 'ramda'
-
 import dom from './utils/dom'
 import layout from './config/layout'
 import rule from './config/rule'
@@ -9,11 +7,13 @@ import './stylus/index.styl'
 
 export default class plateNumberInput {
   constructor(options) {
-    this.options = R.merge(defaultOptions, options)
+    this.options = Object.assign(defaultOptions, options)
     this.el = document.querySelector(this.options.el)
     this.numberType = this.options.defaultNumberType
-    this.active = 1
+    this.currentIndex = 1
+    this.prevIndex = 1
     this._generateLayout()
+    this.setInputFocus(0)
   }
   getNumber() {
     // TODO: 获取当前输入车牌
@@ -24,6 +24,10 @@ export default class plateNumberInput {
   }
   setDefaultNumber() {
     // TODO: 设置默认车牌号
+  }
+  set currentInputIndex(val) {
+    this.prevIndex = this.currentIndex || 0
+    this.currentIndex = val
   }
   /**
    * 生成布局
@@ -43,34 +47,49 @@ export default class plateNumberInput {
   get keyboardWrapper() {
     return this.el.querySelector('#keyboardWrapper')
   }
+  get inputboxWrapper() {
+    return this.el.querySelector('#inputboxWrapper')
+  }
   /**
    * 获取禁用规则
    */
   get disableRule() {
-    return rule[this.active]
+    return rule[this.currentIndex]
   }
-
   get disableKeyItemClassName() {
     return this._prefix('disable')
+  }
+  setInputFocus(index) {
+    this.currentInputIndex = index
+    this.changeFocusClassList()
+  }
+  changeFocusClassList() {
+    const spans = this.inputboxWrapper.querySelectorAll('.container-input span')
+    spans[this.prevIndex].classList.remove('focus')
+    spans[this.currentIndex].classList.add('focus')
   }
   /**
    * 生成键盘
    */
   _generateKeyboard() {
-    const currentKeyboardIndex = this.active && 1
+    const currentKeyboardIndex = this.currentIndex && 1
     const currentKeyboard = layout.keyboard[currentKeyboardIndex]
-    const generatekey = R.map(item => {
-      let classList = this.disableRule.includes(item) ? this.disableKeyItemClassName : ''
-      // 占位符设置
-      if (item === '') {
-        classList += this._prefix('placeholder')
-      }
-      return `<span class="${this._prefix('item') + classList}">${item}</span>`
-    })
-    const combinationRow = R.map(items => {
-      let row = generatekey(items).join('')
-      return `<div class="${this._prefix('row')}">${row}</div>`
-    })
+
+    const generatekey = arr =>
+      arr.map(item => {
+        let classList = this.disableRule.includes(item) ? this.disableKeyItemClassName : ''
+        // 占位符设置
+        if (item === '') {
+          classList += this._prefix('placeholder')
+        }
+        return `<span class="${this._prefix('item') + classList}">${item}</span>`
+      })
+
+    const combinationRow = arr =>
+      arr.map(items => {
+        let row = generatekey(items).join('')
+        return `<div class="${this._prefix('row')}">${row}</div>`
+      })
     this.keyboardWrapper.innerHTML = combinationRow(currentKeyboard).join('')
   }
   _prefix(str) {
