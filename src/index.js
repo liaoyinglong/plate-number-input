@@ -12,7 +12,7 @@ export default class plateNumberInput {
     this.options = R.merge(defaultOptions, options)
     this.el = document.querySelector(this.options.el)
     this.numberType = this.options.defaultNumberType
-    this.active = 2
+    this.active = 1
     this._generateLayout()
   }
   getNumber() {
@@ -49,6 +49,10 @@ export default class plateNumberInput {
   get disableRule() {
     return rule[this.active]
   }
+
+  get disableKeyItemClassName() {
+    return this._prefix('disable')
+  }
   /**
    * 生成键盘
    */
@@ -56,7 +60,7 @@ export default class plateNumberInput {
     const currentKeyboardIndex = this.active && 1
     const currentKeyboard = layout.keyboard[currentKeyboardIndex]
     const generatekey = R.map(item => {
-      let classList = this.disableRule.includes(item) ? this._prefix('disable') : ''
+      let classList = this.disableRule.includes(item) ? this.disableKeyItemClassName : ''
       // 占位符设置
       if (item === '') {
         classList += this._prefix('placeholder')
