@@ -12,7 +12,7 @@ export default class plateNumberInput {
     this.options = R.merge(defaultOptions, options)
     this.el = document.querySelector(this.options.el)
     this.numberType = this.options.defaultNumberType
-    this.active = 3
+    this.active = 2
     this._generateLayout()
   }
   getNumber() {
@@ -57,6 +57,10 @@ export default class plateNumberInput {
     const currentKeyboard = layout.keyboard[currentKeyboardIndex]
     const generatekey = R.map(item => {
       let classList = this.disableRule.includes(item) ? this._prefix('disable') : ''
+      // 占位符设置
+      if (item === '') {
+        classList += this._prefix('placeholder')
+      }
       return `<span class="${this._prefix('item') + classList}">${item}</span>`
     })
     const combinationRow = R.map(items => {
@@ -66,6 +70,6 @@ export default class plateNumberInput {
     this.keyboardWrapper.innerHTML = combinationRow(currentKeyboard).join('')
   }
   _prefix(str) {
-    return `keyboard-${str} `
+    return ` keyboard-${str} `
   }
 }

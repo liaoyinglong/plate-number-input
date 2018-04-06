@@ -7,15 +7,13 @@
   background-image linear-gradient(rgb(39, 53, 66), rgb(27, 36, 45))
   box-sizing border-box
   padding-top 2.987rem
+  disflex()
+  align-items center
 
-  .container-middle
+  .container-input
     disflex(row, false, space-between)
     height 2.7rem
     width 86%
-    position relative
-    left 0
-    right 0
-    margin 0 auto
 
     span
       display block
@@ -36,11 +34,10 @@
       border-radius 0px 6px 6px 0px
       border-right 1px solid rgb(175, 175, 175)
 
-  .container-bottom
+  .container-save-button
     width 90%
     height 2.56rem
-    position relative
-    margin 2.56rem auto 0
+    margin-top 2.56rem
 
     .btnbind
       display block
@@ -56,9 +53,52 @@
       &.active
         background-color rgb(246, 207, 7)
 
+  .container-switch-button
+    margin-top 1.92rem
+
+    span
+      font-size 0.747rem
+      color #ECE09B
+
 #keyboardWrapper
   stackyfooters()
+  background-color #e0e0e0
+  height 242px
 
   .keyboard-row
     width 100vw
-    disflex(row, false, space-around)
+    disflex(row, false, center)
+    margin-bottom 0.32rem /* 6/18.75 */
+
+    &:first-child
+      justify-content flex-end
+      background-color #fff
+      margin-top 0.053333rem /* 1/18.75 */
+
+      span.keyboard-item
+        margin-right 15px
+        color #f6cf07
+        font-size 17px
+        line-height 33px
+
+    &:not(:first-child)
+      .keyboard-item
+        height 2.133333rem /* 40/18.75 */
+        border-radius 5px
+        color #2e2e2e
+        font-size 0.853333rem /* 16/18.75 */
+        background-color #fff
+        flex 1
+        margin-right 0.213333rem /* 4/18.75 */
+        display flex
+        justify-content center
+        align-items center
+
+        &:first-child
+          margin-left 0.213333rem /* 4/18.75 */
+
+        &.keyboard-placeholder
+          background-color transparent
+
+        &.disable
+          background-color rgb(208, 208, 208)
