@@ -1,3 +1,11 @@
 {
-  "px2rem.rootFontSize": 18.75
+  "px2rem.rootFontSize": 18.75,
+  "files.associations": {
+    "*.jsx": "javascriptreact",
+    "*.vue": "vue",
+    "*.wpy": "vue",
+    "*.wxml": "html",
+    "*.wxss": "css",
+    ".gpmrc": "json"
+  }
 }

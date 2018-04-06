@@ -21,10 +21,12 @@
     "babel-plugin-ramda": "^1.5.0",
     "css-loader": "^0.28.11",
     "cz-conventional-changelog": "^2.1.0",
+    "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.1.0",
     "style-loader": "^0.20.3",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "url-loader": "^1.0.1",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1"

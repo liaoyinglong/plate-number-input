@@ -22,12 +22,17 @@ module.exports = {
         test: /\.styl$/,
         use: ['style-loader', 'css-loader', 'stylus-loader'],
       },
+
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use: 'url-loader',
-        options: {
-          limit: 10000,
-        },
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
       },
     ],
   },
