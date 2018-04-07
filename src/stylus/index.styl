@@ -67,24 +67,25 @@ inputSpanBorderColor = rgb(175, 175, 175)
 
   .container-switch-button
     margin-top 1.92rem
+    font-size 0.747rem
+    line-height 1.28rem /* 24/18.75 */
+    color #ECE09B
+    disflex(row, true, center)
 
-    span
-      font-size 0.747rem
-      line-height 1.28rem /* 24/18.75 */
-      color #ECE09B
-      disflex(row, true, center)
-
-      &::before
-        content ' '
-        width 1.28rem /* 24/18.75 */
-        height 1.28rem /* 24/18.75 */
-        background-image url('../img/trans_bindcarnum.png')
-        background-repeat no-repeat
-        background-size cover
+    &::before
+      content ' '
+      width 1.28rem /* 24/18.75 */
+      height 1.28rem /* 24/18.75 */
+      background-image url('../img/trans_bindcarnum.png')
+      background-repeat no-repeat
+      background-size cover
 
 #keyboardWrapper
   stackyfooters()
   background-color #e0e0e0
+
+  &.hide
+    display none
 
   .keyboard-row
     width 100vw
