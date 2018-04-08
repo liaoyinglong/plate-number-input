@@ -168,7 +168,7 @@ var keyboard = [[['确定'], ['粤', '川', '津', '沪', '渝', '蒙', '新', '
 // CONCATENATED MODULE: ./src/config/defaultOptions.js
 /* harmony default export */ var defaultOptions = ({
   el: 'body',
-  defaultNumber: '粤B11111',
+  defaultNumber: '粤B',
   isNewpower: false,
   btnSaveText: '保存',
   switchText: ['切换为新能源绿车牌', '点击切换为普通蓝牌车'],
@@ -247,17 +247,32 @@ function () {
     this.bindEvents();
     this.setDefaultNumber(this.options.defaultNumber);
   }
+  /**
+   * get 当前输入的车牌号码
+   * @returns {string} 
+   */
+
 
   src_createClass(plateNumberInput, [{
     key: "getNumber",
     value: function getNumber() {
-      return this.containerInput.textContent.trim();
+      return this.containerInput.textContent.replace(/\s+/g, "");
     }
+    /**
+     * get 当前的车牌类型 
+     * @returns {boolean} true:新能源车牌 false:普通车牌
+     */
+
   }, {
     key: "getNumberType",
     value: function getNumberType() {
       return this.isNewpower;
     }
+    /**
+     * 设置默认车牌号
+     * @param {string} plateNumber 车牌号
+     */
+
   }, {
     key: "setDefaultNumber",
     value: function setDefaultNumber(plateNumber) {
@@ -275,6 +290,11 @@ function () {
         if (index === _this.inputSpans.length - 1) return onceSetInputFocus(index);
       });
     }
+    /**
+     * 设置车牌类型
+     * @param {boolean} isNewpower true:新能源车牌 false:普通车牌
+     */
+
   }, {
     key: "setNumberType",
     value: function setNumberType() {
@@ -288,12 +308,21 @@ function () {
       if (this.spareSpan.parentNode && !isNewpower) {
         this.containerInput.removeChild(this.spareSpan);
       }
+
+      this.setBtnSaveActive();
     }
+    /**
+     * 设置输入框上面的站位信息
+     * @param {string} info
+     */
+
   }, {
     key: "setInfo",
     value: function setInfo(info) {
       this.containerInfo.innerHTML = info;
     }
+    /**初始化绑定各种事件 */
+
   }, {
     key: "bindEvents",
     value: function bindEvents() {
@@ -357,12 +386,16 @@ function () {
         note('点击的是 保存 按钮');
       });
     }
+    /** 每输入一个字符后调用 */
+
   }, {
     key: "next",
     value: function next() {
       var nextIndex = this.currentIndex === this.inputSpans.length - 1 ? this.currentIndex : this.currentIndex + 1;
       this.setInputFocus(nextIndex);
     }
+    /** 点击删除按钮后调用 */
+
   }, {
     key: "del",
     value: function del() {
@@ -389,10 +422,16 @@ function () {
     }
     /**
      * 获取键盘容器
+     * @returns {Element}
      */
 
   }, {
     key: "setInputFocus",
+
+    /**
+     * 设置指定位置输入框active
+     * @param {number} index 第几个span
+     */
     value: function setInputFocus() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.keyboardWrapper.classList.remove('hide');
@@ -405,13 +444,15 @@ function () {
 
       this.setBtnSaveActive();
     }
+    /**
+     * 设置保存按钮的高亮效果
+     */
+
   }, {
     key: "setBtnSaveActive",
     value: function setBtnSaveActive() {
       var _inputboxWrapper$quer = this.inputboxWrapper.querySelector('#btnSave'),
           classList = _inputboxWrapper$quer.classList;
-
-      console.log(classList);
 
       if (this.getNumber().length === this.inputSpans.length) {
         classList.add('active');
@@ -463,16 +504,30 @@ function () {
     get: function get() {
       return this.el.querySelector('#keyboardWrapper');
     }
+    /**
+     * 上方输入框容器
+     * @returns {Element}
+     */
+
   }, {
     key: "inputboxWrapper",
     get: function get() {
       return this.el.querySelector('#inputboxWrapper');
     }
+    /**
+     * 输入框span的数组
+     * @returns {HTMLCollection}
+     */
+
   }, {
     key: "inputSpans",
     get: function get() {
       return this.containerInput.children;
     }
+    /**
+     * @returns {Element}
+     */
+
   }, {
     key: "containerInfo",
     get: function get() {
@@ -480,6 +535,7 @@ function () {
     }
     /**
      * 获取禁用规则
+     * @returns {string[]}
      */
 
   }, {

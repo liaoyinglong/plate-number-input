@@ -27,7 +27,7 @@ export default class plateNumberInput {
    * @returns {string} 
    */
   getNumber() {
-    return this.containerInput.textContent.trim()
+    return this.containerInput.textContent.replace(/\s+/g,"")
   }
   /**
    * get 当前的车牌类型 
@@ -62,6 +62,7 @@ export default class plateNumberInput {
     if (this.spareSpan.parentNode && !isNewpower) {
       this.containerInput.removeChild(this.spareSpan)
     }
+    this.setBtnSaveActive()        
   }
   /**
    * 设置输入框上面的站位信息
