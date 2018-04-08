@@ -1,6 +1,6 @@
 {
   "name": "plate-number-input",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "start": "webpack-dev-server --mode development --open   --port 9090",
     "dev": "webpack-dev-server --mode development --open --port 9090",
