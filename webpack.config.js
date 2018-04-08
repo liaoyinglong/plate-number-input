@@ -1,17 +1,10 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const { resolve } = require('path')
-var libraryName = 'plateNumberInput'
-var outputFile = libraryName + '.js'
-module.exports = {
+
+const libraryName = 'plateNumberInput'
+
+const baseConfig = {
   entry: './src/index.js',
-  output: {
-    path: resolve(__dirname, './dist'),
-    filename: outputFile,
-    library: libraryName,
-    libraryExport: 'default',
-    libraryTarget: 'umd',
-    globalObject: 'this',
-  },
   module: {
     rules: [
       {
@@ -22,7 +15,6 @@ module.exports = {
         test: /\.styl$/,
         use: ['style-loader', 'css-loader', 'stylus-loader'],
       },
-
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         use: [
@@ -42,5 +34,49 @@ module.exports = {
       filename: './index.html',
     }),
   ],
-  optimization: {},
+}
+
+module.exports = (env, argv) => {
+  const isDev = argv.mode === 'development'
+
+  if (isDev) {
+    return {
+      ...baseConfig,
+      output: {
+        path: resolve(__dirname, './dist'),
+        filename: `${libraryName}.js`,
+        library: libraryName,
+        libraryExport: 'default',
+        libraryTarget: 'umd',
+        globalObject: 'this',
+      },
+    }
+  }
+  return [
+    {
+      ...baseConfig,
+      output: {
+        path: resolve(__dirname, './dist'),
+        filename: `${libraryName}.min.js`,
+        library: libraryName,
+        libraryExport: 'default',
+        libraryTarget: 'umd',
+        globalObject: 'this',
+      },
+    },
+    {
+      ...baseConfig,
+      output: {
+        path: resolve(__dirname, './dist'),
+        filename: `${libraryName}.js`,
+        library: libraryName,
+        libraryExport: 'default',
+        libraryTarget: 'umd',
+        globalObject: 'this',
+      },
+      optimization: {
+        minimize: false,
+      },
+    },
+  ]
 }
