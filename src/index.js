@@ -22,12 +22,24 @@ export default class plateNumberInput {
     this.bindEvents()
     this.setDefaultNumber(this.options.defaultNumber)
   }
+  /**
+   * get 当前输入的车牌号码
+   * @returns {string} 
+   */
   getNumber() {
     return this.containerInput.textContent.trim()
   }
+  /**
+   * get 当前的车牌类型 
+   * @returns {boolean} true:新能源车牌 false:普通车牌
+   */
   getNumberType() {
     return this.isNewpower
   }
+  /**
+   * 设置默认车牌号
+   * @param {string} plateNumber 车牌号
+   */
   setDefaultNumber(plateNumber) {
     // TODO: 设置默认车牌号
     plateNumber = plateNumber.trim()
@@ -38,6 +50,10 @@ export default class plateNumberInput {
       if (index === this.inputSpans.length - 1) return onceSetInputFocus(index)
     })
   }
+  /**
+   * 设置车牌类型
+   * @param {boolean} isNewpower true:新能源车牌 false:普通车牌
+   */
   setNumberType(isNewpower = false) {
     this.isNewpower = isNewpower
     if (!this.spareSpan.parentNode && isNewpower) {
@@ -47,9 +63,14 @@ export default class plateNumberInput {
       this.containerInput.removeChild(this.spareSpan)
     }
   }
+  /**
+   * 设置输入框上面的站位信息
+   * @param {string} info
+   */
   setInfo(info) {
     this.containerInfo.innerHTML = info
   }
+  /**初始化绑定各种事件 */
   bindEvents() {
     // 绑定输入框按钮事件
     dom.on(this.containerInput, 'click', 'span', e => {
@@ -101,10 +122,12 @@ export default class plateNumberInput {
       note('点击的是 保存 按钮')
     })
   }
+  /** 每输入一个字符后调用 */
   next() {
     const nextIndex = this.currentIndex === this.inputSpans.length - 1 ? this.currentIndex : this.currentIndex + 1
     this.setInputFocus(nextIndex)
   }
+  /** 点击删除按钮后调用 */
   del() {
     const prev = this.currentIndex === 0 ? 0 : this.currentIndex - 1
     this.inputSpans[this.currentIndex].innerText = ''
@@ -127,21 +150,34 @@ export default class plateNumberInput {
   }
   /**
    * 获取键盘容器
+   * @returns {Element}
    */
   get keyboardWrapper() {
     return this.el.querySelector('#keyboardWrapper')
   }
+  /**
+   * 上方输入框容器
+   * @returns {Element}
+   */
   get inputboxWrapper() {
     return this.el.querySelector('#inputboxWrapper')
   }
+  /**
+   * 输入框span的数组
+   * @returns {HTMLCollection}
+   */
   get inputSpans() {
     return this.containerInput.children
   }
+  /**
+   * @returns {Element}
+   */
   get containerInfo() {
     return this.inputboxWrapper.querySelector('.container-info')
   }
   /**
    * 获取禁用规则
+   * @returns {string[]}
    */
   get disableRule() {
     return rule[this.currentIndex]
@@ -155,6 +191,10 @@ export default class plateNumberInput {
   get deleteKeyItemClassName() {
     return this._prefix('delete')
   }
+  /**
+   * 设置指定位置输入框active
+   * @param {number} index 第几个span
+   */
   setInputFocus(index = 0) {
     this.keyboardWrapper.classList.remove('hide')
     this.prevIndex = this.currentIndex || 0
@@ -164,6 +204,9 @@ export default class plateNumberInput {
     this._generateKeyboard()
     this.setBtnSaveActive()
   }
+  /**
+   * 设置保存按钮的高亮效果
+   */
   setBtnSaveActive() {
     const { classList } = this.inputboxWrapper.querySelector('#btnSave')
     if (this.getNumber().length === this.inputSpans.length) {
