@@ -1,6 +1,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const { resolve } = require('path')
 const webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const libraryName = 'plateNumberInput'
 const { version } = require('./package.json')
@@ -59,10 +60,19 @@ module.exports = (env, argv) => {
         library: libraryName,
         libraryExport: 'default',
         libraryTarget: 'umd',
-        globalObject: 'this',
       },
     }
   }
+  const plugins = [
+    ...baseConfig.plugins,
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        compress: {
+          drop_console: true,
+        },
+      },
+    }),
+  ]
   return [
     {
       ...baseConfig,
@@ -72,8 +82,11 @@ module.exports = (env, argv) => {
         library: libraryName,
         libraryExport: 'default',
         libraryTarget: 'umd',
-        globalObject: 'this',
       },
+      optimization: {
+        minimize: false,
+      },
+      plugins,
     },
     {
       ...baseConfig,
@@ -83,7 +96,6 @@ module.exports = (env, argv) => {
         library: libraryName,
         libraryExport: 'default',
         libraryTarget: 'umd',
-        globalObject: 'this',
       },
       optimization: {
         minimize: false,
