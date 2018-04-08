@@ -5,7 +5,8 @@
     "start": "webpack-dev-server --mode development --open   --port 9090",
     "dev": "webpack-dev-server --mode development --open --port 9090",
     "build": "webpack --mode production",
-    "changelog":"conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "doc": "jsdoc ./src/index.js README.md -d ./doc"
   },
   "main": "dist/plateNumberInput.js",
   "module": "src/index.js",
