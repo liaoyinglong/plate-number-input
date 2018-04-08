@@ -1,7 +1,14 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const { resolve } = require('path')
+const webpack = require('webpack')
 
 const libraryName = 'plateNumberInput'
+const { version } = require('./package.json')
+const banner = `
+  ${libraryName}.js v${version}
+  (c) 2018 - 2018 liaoyinglong
+  https://github.com/liaoyinglong/plate-number-input
+`
 
 const baseConfig = {
   entry: './src/index.js',
@@ -32,6 +39,10 @@ const baseConfig = {
     new HtmlWebPackPlugin({
       template: './example/index.html',
       filename: './index.html',
+    }),
+    new webpack.BannerPlugin({
+      banner,
+      entryOnly: true,
     }),
   ],
 }
