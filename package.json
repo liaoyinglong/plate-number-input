@@ -4,7 +4,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open   --port 9090",
     "dev": "webpack-dev-server --mode development --open --port 9090",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "changelog":"conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "main": "dist/plateNumberInput.js",
   "module": "src/index.js",
