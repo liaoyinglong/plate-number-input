@@ -13,13 +13,12 @@
 
 </body>
 <script>
-  const log = (env => thing => env === 'dev' ? console.log(thing) : '')('dev')
-
+  const { log } = console
 
   const input = new plateNumberInput({
     el: '#app',
     defaultNumber: '粤B11111',
-    defaultNumberType: 'common', // 对应普通车   newPower
+    isNewpower: false
   })
 
   log('input 对象')

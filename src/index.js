@@ -4,41 +4,51 @@ import layout from './config/layout'
 import rule from './config/rule'
 import defaultOptions from './config/defaultOptions'
 import { warn, note } from './log'
-import { throttle } from './utils'
+import { throttle, once } from './utils'
 import './stylus/index.styl'
 
 export default class plateNumberInput {
   constructor(options) {
     this.options = Object.assign(defaultOptions, options)
     this.el = document.querySelector(this.options.el)
-    this.numberType = this.options.defaultNumberType
     this.currentIndex = 0
     this.prevIndex = 0
     this.containerInput = null
     this.spareSpan = null
+    this.isNewpower = this.options.isNewpower
     this._generateLayout()
     this.setInputFocus()
-    this.setNumberType(this.numberType)
+    this.setNumberType(this.isNewpower)
     this.bindEvents()
+    this.setDefaultNumber(this.options.defaultNumber)
   }
   getNumber() {
-    // TODO: 获取当前输入车牌
     return this.containerInput.textContent.trim()
   }
   getNumberType() {
-    // TODO: 获取当前车牌类型
-    return this.numberType
+    return this.isNewpower
   }
-  setDefaultNumber() {
+  setDefaultNumber(plateNumber) {
     // TODO: 设置默认车牌号
+    plateNumber = plateNumber.trim()
+    const onceSetInputFocus = once(index => this.setInputFocus(index))
+    ;[...this.inputSpans].forEach((span, index) => {
+      span.innerText = plateNumber[index] || ''
+      if (plateNumber[index] === undefined) return onceSetInputFocus(index)
+      if (index === this.inputSpans.length - 1) return onceSetInputFocus(index)
+    })
   }
-  setNumberType(type = 'common') {
-    if (!this.spareSpan.parentNode && type !== 'common') {
+  setNumberType(isNewpower = false) {
+    this.isNewpower = isNewpower
+    if (!this.spareSpan.parentNode && isNewpower) {
       this.containerInput.appendChild(this.spareSpan)
     }
-    if (this.spareSpan.parentNode && type === 'common') {
+    if (this.spareSpan.parentNode && !isNewpower) {
       this.containerInput.removeChild(this.spareSpan)
     }
+  }
+  setInfo(info) {
+    this.containerInfo.innerHTML = info
   }
   bindEvents() {
     // 绑定输入框按钮事件
@@ -54,7 +64,6 @@ export default class plateNumberInput {
       throttle(e => {
         const el = e.target
         const text = el.innerText
-        const { type } = el.dataset
         if (el.className.includes(this.disableKeyItemClassName)) {
           return note('点击的是 已被禁用的键')
         }
@@ -66,7 +75,7 @@ export default class plateNumberInput {
           this.keyboardWrapper.classList.add('hide')
           return note('点击的是 确定 键')
         }
-        if (type === 'delete') {
+        if (el.className.includes(this.deleteKeyItemClassName)) {
           this.del()
           return note('点击的是 删除 键')
         }
@@ -75,6 +84,7 @@ export default class plateNumberInput {
         this.next()
       }),
     )
+    // 点击切换车牌按钮
     dom.on(this.inputboxWrapper, 'click', '.container-switch-button', e => {
       const el = e.target
       const text = el.innerText.trim()
@@ -82,7 +92,13 @@ export default class plateNumberInput {
         if (item === text) return
         el.innerText = el.innerText.replace(text, item)
       })
-      note('switch')
+      this.setNumberType(!this.isNewpower)
+      note('点击的是 切换车牌 按钮')
+    })
+    // 点击保存按钮
+    dom.on(this.inputboxWrapper, 'click', 'span#btnSave', e => {
+      this.options.onBtnSaveClick(e)
+      note('点击的是 保存 按钮')
     })
   }
   next() {
@@ -94,7 +110,6 @@ export default class plateNumberInput {
     this.inputSpans[this.currentIndex].innerText = ''
     this.setInputFocus(prev)
   }
-  switchNumerType() {}
   /**
    * 生成布局
    */
@@ -122,6 +137,9 @@ export default class plateNumberInput {
   get inputSpans() {
     return this.containerInput.children
   }
+  get containerInfo() {
+    return this.inputboxWrapper.querySelector('.container-info')
+  }
   /**
    * 获取禁用规则
    */
@@ -133,6 +151,9 @@ export default class plateNumberInput {
   }
   get placeholderClassName() {
     return this._prefix('placeholder')
+  }
+  get deleteKeyItemClassName() {
+    return this._prefix('delete')
   }
   setInputFocus(index = 0) {
     this.keyboardWrapper.classList.remove('hide')
@@ -157,9 +178,8 @@ export default class plateNumberInput {
         if (item === '') {
           classList += this.placeholderClassName
         }
-        return `<span class="${this._prefix('item') + classList}" data-type="${item}">${
-          item === 'delete' ? '' : item
-        }</span>`
+        if (item === 'delete') classList += this.deleteKeyItemClassName
+        return `<span class="${this._prefix('item') + classList}" >${item === 'delete' ? '' : item}</span>`
       })
 
     const combinationRow = arr =>

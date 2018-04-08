@@ -1,10 +1,10 @@
 export default {
   el: 'body',
   defaultNumber: '粤B11111',
-  defaultNumberType: 'common', // 对应普通车 newPower
+  isNewpower: false,
   btnSaveText: '保存',
   switchText: ['切换为新能源绿车牌', '点击切换为普通蓝牌车'],
-  btnSaveClick() {
+  onBtnSaveClick() {
     console.log('点击了btnSave按钮')
   },
 }

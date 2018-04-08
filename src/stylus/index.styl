@@ -6,14 +6,20 @@ inputSpanBorderColor = rgb(175, 175, 175)
 
 #inputboxWrapper
   background-color #000000
-  height 15.6rem
   background-image linear-gradient(rgb(39, 53, 66), rgb(27, 36, 45))
   box-sizing border-box
-  padding-top 2.987rem
+  padding 1.866667rem 0
   disflex()
   align-items center
 
+  .container-info
+    font-family 'PingFang-SC-Medium'
+    font-size 0.853333rem /* 16/18.75 */
+    color #ffffff
+    text-align center
+
   .container-input
+    margin-top 1.28rem /* 24/18.75 */
     disflex(row, false, space-between)
     height 2.7rem
     width 86%
@@ -90,7 +96,7 @@ inputSpanBorderColor = rgb(175, 175, 175)
   .keyboard-row
     width 100vw
     disflex(row, false, center)
-    margin-bottom 0.32rem /* 6/18.75 */
+    margin-bottom 0.426667rem /* 8/18.75 */
 
     &:first-child
       justify-content flex-end
@@ -124,3 +130,10 @@ inputSpanBorderColor = rgb(175, 175, 175)
 
         &.keyboard-disable
           background-color rgb(208, 208, 208)
+
+        &.keyboard-delete
+          background-color rgb(170, 178, 188)
+          background-image url('../img/airportdelete.png')
+          background-position center center
+          background-repeat no-repeat
+          background-size 20px 13px

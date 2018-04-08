@@ -1,6 +1,7 @@
 const input = new Array(8).fill(undefined).map((item, index) => `<span data-index='${index}'></span>`)
 const inputbox = `
   <div id='inputboxWrapper' class="container-top">
+    <div class='container-info'>宝立方创意产业园(地库)</div>
     <div class="container-input">
        ${input.join('')}
     </div>

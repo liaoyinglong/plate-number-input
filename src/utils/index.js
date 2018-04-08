@@ -1,11 +1,3 @@
-export function toggle(...actions) {
-  return function(...args) {
-    const action = actions.shift()
-    actions.push(action)
-    return action.apply(this, args)
-  }
-}
-
 export function throttle(fn, time = 100) {
   let timer
   return function(...args) {
@@ -14,6 +6,16 @@ export function throttle(fn, time = 100) {
       timer = setTimeout(() => {
         timer = null
       }, time)
+    }
+  }
+}
+
+export function once(fn) {
+  return function(...args) {
+    if (fn) {
+      let ret = fn.apply(this, args)
+      fn = null
+      return ret
     }
   }
 }
