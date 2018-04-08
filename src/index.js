@@ -162,8 +162,16 @@ export default class plateNumberInput {
     this.inputSpans[this.prevIndex].classList.remove('focus')
     this.inputSpans[this.currentIndex].classList.add('focus')
     this._generateKeyboard()
+    this.setBtnSaveActive()
   }
-
+  setBtnSaveActive() {
+    const { classList } = this.inputboxWrapper.querySelector('#btnSave')
+    if (this.getNumber().length === this.inputSpans.length) {
+      classList.add('active')
+    } else {
+      classList.remove('active')
+    }
+  }
   /**
    * 生成键盘
    */
