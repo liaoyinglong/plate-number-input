@@ -56,6 +56,7 @@ export default class plateNumberInput {
     const onceSetInputFocus = once(index => this.setInputFocus(index))
     ;[...this.inputSpans].forEach((span, index) => {
       span.innerText = plateNumber[index] || ''
+      alert(plateNumber[index])
       if (plateNumber[index] === undefined) return onceSetInputFocus(index)
       if (index === this.inputSpans.length - 1) return onceSetInputFocus(index)
     })
@@ -128,8 +129,8 @@ export default class plateNumberInput {
       note('点击的是 切换车牌 按钮')
     })
     // 点击保存按钮
-    dom.on(this.inputboxWrapper, 'click', 'span#btnSave', e => {
-      this.options.onBtnSaveClick(e)
+    dom.on(this.inputboxWrapper, 'click', '.btnbind', e => {
+      this.options.onBtnSaveClick && this.options.onBtnSaveClick(e)
       note('点击的是 保存 按钮')
     })
   }
