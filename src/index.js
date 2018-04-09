@@ -8,6 +8,16 @@ import { throttle, once } from './utils'
 import './stylus/index.styl'
 
 export default class plateNumberInput {
+  /**
+   * 配置项
+   * @param {object} options 配置项
+   * @param {string} options.el 挂载对应元素里面，传选择器字符串  必填
+   * @param {string} options.defaultNumber 初始化时默认的车牌号  非必填
+   * @param {boolean} options.isNewpower 车牌类型true:新能源车牌 false:普通车牌 非必填 一般不传
+   * @param {string} options.btnSaveText 自定义保存按钮的文字内容  非必填
+   * @param {string[]} options.switchText 自定义切换按钮的文字内容  非必填
+   * @param {Function} options.onBtnSaveClick 点击保存按钮回调 非必填
+   */
   constructor(options) {
     this.options = Object.assign(defaultOptions, options)
     this.el = document.querySelector(this.options.el)
@@ -24,13 +34,13 @@ export default class plateNumberInput {
   }
   /**
    * get 当前输入的车牌号码
-   * @returns {string} 
+   * @returns {string}
    */
   getNumber() {
-    return this.containerInput.textContent.replace(/\s+/g,"")
+    return this.containerInput.textContent.replace(/\s+/g, '')
   }
   /**
-   * get 当前的车牌类型 
+   * get 当前的车牌类型
    * @returns {boolean} true:新能源车牌 false:普通车牌
    */
   getNumberType() {
@@ -62,7 +72,7 @@ export default class plateNumberInput {
     if (this.spareSpan.parentNode && !isNewpower) {
       this.containerInput.removeChild(this.spareSpan)
     }
-    this.setBtnSaveActive()        
+    this.setBtnSaveActive()
   }
   /**
    * 设置输入框上面的站位信息

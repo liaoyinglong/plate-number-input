@@ -1,6 +1,6 @@
 /*!
  * 
- *   plateNumberInput.js v1.0.0
+ *   plateNumberInput.js v1.0.1
  *   (c) 2018 - 2018 liaoyinglong
  *   https://github.com/liaoyinglong/plate-number-input
  * 
@@ -229,6 +229,16 @@ function src_createClass(Constructor, protoProps, staticProps) { if (protoProps)
 var src_plateNumberInput =
 /*#__PURE__*/
 function () {
+  /**
+   * 配置项
+   * @param {object} options 配置项
+   * @param {string} options.el 挂载对应元素里面，传选择器字符串  必填
+   * @param {string} options.defaultNumber 初始化时默认的车牌号  非必填
+   * @param {boolean} options.isNewpower 车牌类型true:新能源车牌 false:普通车牌 非必填 一般不传
+   * @param {string} options.btnSaveText 自定义保存按钮的文字内容  非必填
+   * @param {string[]} options.switchText 自定义切换按钮的文字内容  非必填
+   * @param {Function} options.onBtnSaveClick 点击保存按钮回调 非必填
+   */
   function plateNumberInput(options) {
     src_classCallCheck(this, plateNumberInput);
 
@@ -249,17 +259,17 @@ function () {
   }
   /**
    * get 当前输入的车牌号码
-   * @returns {string} 
+   * @returns {string}
    */
 
 
   src_createClass(plateNumberInput, [{
     key: "getNumber",
     value: function getNumber() {
-      return this.containerInput.textContent.replace(/\s+/g, "");
+      return this.containerInput.textContent.replace(/\s+/g, '');
     }
     /**
-     * get 当前的车牌类型 
+     * get 当前的车牌类型
      * @returns {boolean} true:新能源车牌 false:普通车牌
      */
 
