@@ -203,14 +203,6 @@ var stylus = __webpack_require__(8);
 
 // CONCATENATED MODULE: ./src/index.js
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return src_plateNumberInput; });
-function src_toConsumableArray(arr) { return src_arrayWithoutHoles(arr) || src_iterableToArray(arr) || src_nonIterableSpread(); }
-
-function src_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function src_iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function src_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 function src_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function src_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -294,11 +286,12 @@ function () {
         return _this.setInputFocus(index);
       });
 
-      src_toConsumableArray(this.inputSpans).forEach(function (span, index) {
+      for (var index = 0; index < this.inputSpans.length; index++) {
+        var span = this.inputSpans[index];
         span.innerText = plateNumber[index] || '';
         if (plateNumber[index] === undefined) return onceSetInputFocus(index);
-        if (index === _this.inputSpans.length - 1) return onceSetInputFocus(index);
-      });
+        if (index === this.inputSpans.length - 1) return onceSetInputFocus(index);
+      }
     }
     /**
      * 设置车牌类型
@@ -390,9 +383,8 @@ function () {
         note('点击的是 切换车牌 按钮');
       }); // 点击保存按钮
 
-      dom.on(this.inputboxWrapper, 'click', 'span#btnSave', function (e) {
-        _this2.options.onBtnSaveClick(e);
-
+      dom.on(this.inputboxWrapper, 'click', '.btnbind', function (e) {
+        _this2.options.onBtnSaveClick && _this2.options.onBtnSaveClick(e);
         note('点击的是 保存 按钮');
       });
     }
