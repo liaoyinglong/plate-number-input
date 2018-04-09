@@ -2,7 +2,7 @@
   "name": "plate-number-input",
   "version": "1.0.1",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open   --port 9090",
+    "start": "webpack-dev-server --mode development --open --host 0.0.0.0  --port 9090",
     "dev": "webpack-dev-server --mode development --open --port 9090",
     "build": "webpack --mode production",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",

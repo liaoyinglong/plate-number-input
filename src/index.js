@@ -54,12 +54,12 @@ export default class plateNumberInput {
     // TODO: 设置默认车牌号
     plateNumber = plateNumber.trim()
     const onceSetInputFocus = once(index => this.setInputFocus(index))
-    ;[...this.inputSpans].forEach((span, index) => {
+    for (let index = 0; index < this.inputSpans.length; index++) {
+      const span = this.inputSpans[index]
       span.innerText = plateNumber[index] || ''
-      alert(plateNumber[index])
       if (plateNumber[index] === undefined) return onceSetInputFocus(index)
       if (index === this.inputSpans.length - 1) return onceSetInputFocus(index)
-    })
+    }
   }
   /**
    * 设置车牌类型

@@ -5,6 +5,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script>
+    "use strict";
+
+
+    (function (doc, win) {
+      var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function recalc() {
+          var clientWidth = docEl.clientWidth;
+
+          if (clientWidth > 450) {
+            clientWidth = 450;
+          }
+
+          if (!clientWidth) return;
+          var u = navigator.userAgent; //android
+
+          var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //ios
+
+          var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios缁堢
+
+          var isiOS10 = !!u.match(/\(i[^;]+;( U;)? CPU iPhone OS 10_.+Mac OS X/);
+
+          if (isAndroid) {
+            docEl.style.fontSize = 16 * (clientWidth / 320) + 'px';
+          } else if (isiOS) {
+            docEl.style.fontSize = 16 * (clientWidth / 320) + 'px';
+
+            if (isiOS10) {
+              docEl.style.fontSize = 15 * (clientWidth / 320) + 'px';
+            }
+          } else {
+            docEl.style.fontSize = 16 * (clientWidth / 320) + 'px';
+          }
+        };
+
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+  </script>
   <title>Document</title>
 </head>
 
