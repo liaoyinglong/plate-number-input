@@ -1,3 +1,4 @@
+require('core-js/fn/array/fill')
 const input = new Array(8).fill(undefined).map((item, index) => `<span data-index='${index}'></span>`)
 const inputbox = `
   <div id='inputboxWrapper' class="container-top">

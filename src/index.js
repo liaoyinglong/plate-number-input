@@ -6,6 +6,9 @@ import defaultOptions from './config/defaultOptions'
 import { warn, note } from './log'
 import { throttle, once } from './utils'
 import './stylus/index.styl'
+require('core-js/fn/object/assign')
+require('core-js/fn/array/virtual/includes')
+require('core-js/fn/string/virtual/includes')
 
 export default class plateNumberInput {
   /**
@@ -90,33 +93,28 @@ export default class plateNumberInput {
       this.setInputFocus(Number(index))
     })
     // 模拟键盘 点击事件
-    dom.on(
-      this.keyboardWrapper,
-      'click',
-      'span',
-      throttle(e => {
-        const el = e.target
-        const text = el.innerText
-        if (el.className.includes(this.disableKeyItemClassName)) {
-          return note('点击的是 已被禁用的键')
-        }
-        if (el.className.includes(this.placeholderClassName)) {
-          return note('点击的是 无效键')
-        }
-        // 点击的是确定键
-        if (text === '确定') {
-          this.keyboardWrapper.classList.add('hide')
-          return note('点击的是 确定 键')
-        }
-        if (el.className.includes(this.deleteKeyItemClassName)) {
-          this.del()
-          return note('点击的是 删除 键')
-        }
-        // 点击的是普通键
-        this.inputSpans[this.currentIndex].innerText = text
-        this.next()
-      }),
-    )
+    dom.on(this.keyboardWrapper, 'click', 'span', e => {
+      const el = e.target
+      const text = el.innerText
+      if (el.className.includes(this.disableKeyItemClassName)) {
+        return note('点击的是 已被禁用的键')
+      }
+      if (el.className.includes(this.placeholderClassName)) {
+        return note('点击的是 无效键')
+      }
+      // 点击的是确定键
+      if (text === '确定') {
+        this.keyboardWrapper.classList.add('hide')
+        return note('点击的是 确定 键')
+      }
+      if (el.className.includes(this.deleteKeyItemClassName)) {
+        this.del()
+        return note('点击的是 删除 键')
+      }
+      // 点击的是普通键
+      this.inputSpans[this.currentIndex].innerText = text
+      this.next()
+    })
     // 点击切换车牌按钮
     dom.on(this.inputboxWrapper, 'click', '.container-switch-button', e => {
       const el = e.target
