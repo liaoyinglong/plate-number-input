@@ -4,6 +4,8 @@
 
 [在线 demo](https://liaoyinglong.github.io/plate-number-input/dist/)
 
+![](./example/demo.gif)
+
 ## Quick Start
 
 ```javascript
