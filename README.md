@@ -4,14 +4,6 @@
 
 [在线 demo](https://liaoyinglong.github.io/plate-number-input/dist/)
 
-## 浏览器支持
-
-ie9+
-
-## api 文档
-
-[文档地址](https://liaoyinglong.github.io/plate-number-input/doc/)
-
 ## Quick Start
 
 ```javascript
@@ -36,6 +28,46 @@ input.setDefaultNumber('粤A3RHKT')
 log('设置车牌输入框上方提示文字')
 input.setInfo('输入框上方提示文字')
 ```
+
+## Installation
+
+### 从 GitHub 下载代码
+
+```html
+<script src="/path/to/plateNumberInput.js"></script>
+```
+
+### 用包管理工具
+
+支持 [npm](https://www.npmjs.com/package/js-cookie)
+
+#### NPM
+
+```
+  $ npm install plate-number-input --save
+```
+
+### Module Loaders
+
+支持 AMD, CommonJS 以及 ES module.
+
+#### script 标签引入
+
+`script` 标签引入，暴露在全局的变量是 `plateNumberInput`
+
+#### ES6
+
+```javascript
+import PlateNumberInput from 'plate-number-input'
+```
+
+## 浏览器支持
+
+ie9+
+
+## api 文档
+
+[文档地址](https://liaoyinglong.github.io/plate-number-input/doc/)
 
 ## 更新日志
 
