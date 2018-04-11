@@ -1,6 +1,6 @@
 /*!
  * 
- *   plateNumberInput.js v1.0.5
+ *   plateNumberInput.js v1.0.6
  *   (c) 2018 - 2018 liaoyinglong
  *   https://github.com/liaoyinglong/plate-number-input
  * 
@@ -581,7 +581,6 @@ function () {
     this.options = Object.assign(defaultOptions, options);
     this.el = document.querySelector(this.options.el);
     this.currentIndex = 0;
-    this.prevIndex = 0;
     this.containerInput = null;
     this.spareSpan = null;
     this.isNewpower = this.options.isNewpower;
@@ -648,6 +647,7 @@ function () {
       var isNewpower = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       this.isNewpower = isNewpower;
       var lastIndex = this.inputSpans.length - 1;
+      this.spareSpan.innerText = '';
 
       if (!this.spareSpan.parentNode && isNewpower) {
         this.containerInput.appendChild(this.spareSpan);
@@ -657,7 +657,6 @@ function () {
         this.containerInput.removeChild(this.spareSpan);
       }
 
-      console.log(this.inputSpans.length);
       var index = this.currentIndex === lastIndex ? this.inputSpans.length - 1 : this.currentIndex;
       this.setInputFocus(index);
       this.setBtnSaveActive();
@@ -785,10 +784,13 @@ function () {
     value: function setInputFocus() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.keyboardWrapper.classList.remove('hide');
-      this.prevIndex = this.currentIndex || 0;
+
+      for (var i = 0; i < this.inputSpans.length; i++) {
+        this.inputSpans[i].classList.remove('focus');
+      }
+
       this.currentIndex = index;
-      this.inputSpans[this.prevIndex] && this.inputSpans[this.prevIndex].classList.remove('focus');
-      this.inputSpans[this.currentIndex] && this.inputSpans[this.currentIndex].classList.add('focus');
+      this.inputSpans[index].classList.add('focus');
 
       this._generateKeyboard();
 
