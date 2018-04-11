@@ -70,6 +70,7 @@ export default class plateNumberInput {
    */
   setNumberType(isNewpower = false) {
     this.isNewpower = isNewpower;
+    const lastIndex = this.inputSpans.length - 1;
     if (!this.spareSpan.parentNode && isNewpower) {
       this.containerInput.appendChild(this.spareSpan);
     }
@@ -77,7 +78,8 @@ export default class plateNumberInput {
       this.containerInput.removeChild(this.spareSpan);
     }
     console.log(this.inputSpans.length);
-    this.setInputFocus(this.inputSpans.length - 1);
+    const index = this.currentIndex === lastIndex ? this.inputSpans.length - 1 : this.currentIndex;
+    this.setInputFocus(index);
     this.setBtnSaveActive();
   }
   /**
