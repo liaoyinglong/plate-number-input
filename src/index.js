@@ -25,7 +25,6 @@ export default class plateNumberInput {
     this.options = Object.assign(defaultOptions, options);
     this.el = document.querySelector(this.options.el);
     this.currentIndex = 0;
-    this.prevIndex = 0;
     this.containerInput = null;
     this.spareSpan = null;
     this.isNewpower = this.options.isNewpower;
@@ -71,6 +70,7 @@ export default class plateNumberInput {
   setNumberType(isNewpower = false) {
     this.isNewpower = isNewpower;
     const lastIndex = this.inputSpans.length - 1;
+    this.spareSpan.innerText = ''
     if (!this.spareSpan.parentNode && isNewpower) {
       this.containerInput.appendChild(this.spareSpan);
     }
@@ -210,10 +210,11 @@ export default class plateNumberInput {
    */
   setInputFocus(index = 0) {
     this.keyboardWrapper.classList.remove('hide');
-    this.prevIndex = this.currentIndex || 0;
-    this.currentIndex = index;
-    this.inputSpans[this.prevIndex] && this.inputSpans[this.prevIndex].classList.remove('focus');
-    this.inputSpans[this.currentIndex] && this.inputSpans[this.currentIndex].classList.add('focus');
+    for (let i = 0; i < this.inputSpans.length; i++) {
+      this.inputSpans[i].classList.remove('focus');
+    }
+    this.currentIndex = index;    
+    this.inputSpans[index].classList.add('focus');
     this._generateKeyboard();
     this.setBtnSaveActive();
   }
