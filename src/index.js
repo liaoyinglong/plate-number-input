@@ -77,7 +77,6 @@ export default class plateNumberInput {
     if (this.spareSpan.parentNode && !isNewpower) {
       this.containerInput.removeChild(this.spareSpan);
     }
-    console.log(this.inputSpans.length);
     const index = this.currentIndex === lastIndex ? this.inputSpans.length - 1 : this.currentIndex;
     this.setInputFocus(index);
     this.setBtnSaveActive();

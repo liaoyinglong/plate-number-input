@@ -1,6 +1,6 @@
 /*!
  * 
- *   plateNumberInput.js v1.0.4
+ *   plateNumberInput.js v1.0.5
  *   (c) 2018 - 2018 liaoyinglong
  *   https://github.com/liaoyinglong/plate-number-input
  * 
@@ -647,6 +647,7 @@ function () {
     value: function setNumberType() {
       var isNewpower = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       this.isNewpower = isNewpower;
+      var lastIndex = this.inputSpans.length - 1;
 
       if (!this.spareSpan.parentNode && isNewpower) {
         this.containerInput.appendChild(this.spareSpan);
@@ -657,7 +658,8 @@ function () {
       }
 
       console.log(this.inputSpans.length);
-      this.setInputFocus(this.inputSpans.length - 1);
+      var index = this.currentIndex === lastIndex ? this.inputSpans.length - 1 : this.currentIndex;
+      this.setInputFocus(index);
       this.setBtnSaveActive();
     }
     /**
