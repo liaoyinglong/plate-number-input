@@ -1,6 +1,6 @@
 /*!
  * 
- *   plateNumberInput.js v1.0.3
+ *   plateNumberInput.js v1.0.4
  *   (c) 2018 - 2018 liaoyinglong
  *   https://github.com/liaoyinglong/plate-number-input
  * 
@@ -124,9 +124,9 @@ var core = __webpack_require__(0);
 
 var hide = __webpack_require__(9);
 
-var redefine = __webpack_require__(50);
+var redefine = __webpack_require__(51);
 
-var ctx = __webpack_require__(49);
+var ctx = __webpack_require__(50);
 
 var PROTOTYPE = 'prototype';
 
@@ -245,9 +245,9 @@ module.exports = !__webpack_require__(7)(function () {
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(56);
+var dP = __webpack_require__(57);
 
-var createDesc = __webpack_require__(51);
+var createDesc = __webpack_require__(52);
 
 module.exports = __webpack_require__(8) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
@@ -486,12 +486,12 @@ function once(fn) {
   };
 }
 // CONCATENATED MODULE: ./src/config/layout.js
-__webpack_require__(58);
+__webpack_require__(59);
 
 var input = new Array(8).fill(undefined).map(function (item, index) {
   return "<span data-index='".concat(index, "'></span>");
 });
-var layout_inputbox = "\n  <div id='inputboxWrapper' class=\"container-top\">\n    <div class='container-info'>\u5B9D\u7ACB\u65B9\u521B\u610F\u4EA7\u4E1A\u56ED(\u5730\u5E93)</div>\n    <div class=\"container-input\">\n       ".concat(input.join(''), "\n    </div>\n    <div class=\"container-save-button\">\n      <span id=\"btnSave\" class=\"btnbind\">{{btnSaveText}}</span>\n    </div>\n    <div  class=\"container-switch-button\">\n      &nbsp;&nbsp;{{switchText}}\n    </div>\n  </div>\n");
+var layout_inputbox = "\n <div>\n  <div id='inputboxWrapper' class=\"container-top\">\n  <div class='container-info'>\u5B9D\u7ACB\u65B9\u521B\u610F\u4EA7\u4E1A\u56ED(\u5730\u5E93)</div>\n  <div class=\"container-input\">\n      ".concat(input.join(''), "\n  </div>\n  <div class=\"container-save-button\">\n    <span id=\"btnSave\" class=\"btnbind\">{{btnSaveText}}</span>\n  </div>\n  <div  class=\"container-switch-button\">\n    &nbsp;&nbsp;{{switchText}}\n  </div>\n  </div>\n  <span class='bar_bindcarnum'></span>\n </div>\n");
 var keyboard = [[['确定'], ['粤', '川', '津', '沪', '渝', '蒙', '新', '藏', '宁', '桂'], ['陕', '浙', '晋', '冀', '青', '鲁', '豫', '苏', '皖', '辽'], ['贵', '闽', '赣', '湘', '鄂', '京', '琼', '甘', '云', '黑'], ['吉', '', '', '', '', '', '', '', '', 'delete']], [['确定'], ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'P', '港', '澳'], ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '学'], ['', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '', 'delete']]];
 /* harmony default export */ var layout = ({
   keyboard: keyboard,
@@ -537,15 +537,15 @@ function note() {
   console.log(['NOTE:'].concat(thing).join(' '));
 }
 // EXTERNAL MODULE: ./src/stylus/index.styl
-var stylus = __webpack_require__(46);
+var stylus = __webpack_require__(47);
 
 // CONCATENATED MODULE: ./src/index.js
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return src_plateNumberInput; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function src_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function src_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function src_createClass(Constructor, protoProps, staticProps) { if (protoProps) src_defineProperties(Constructor.prototype, protoProps); if (staticProps) src_defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
@@ -576,7 +576,7 @@ function () {
    * @param {Function} options.onBtnSaveClick 点击保存按钮回调 非必填
    */
   function plateNumberInput(options) {
-    _classCallCheck(this, plateNumberInput);
+    src_classCallCheck(this, plateNumberInput);
 
     this.options = Object.assign(defaultOptions, options);
     this.el = document.querySelector(this.options.el);
@@ -599,7 +599,7 @@ function () {
    */
 
 
-  _createClass(plateNumberInput, [{
+  src_createClass(plateNumberInput, [{
     key: "getNumber",
     value: function getNumber() {
       return this.containerInput.textContent.replace(/\s+/g, '');
@@ -656,6 +656,8 @@ function () {
         this.containerInput.removeChild(this.spareSpan);
       }
 
+      console.log(this.inputSpans.length);
+      this.setInputFocus(this.inputSpans.length - 1);
       this.setBtnSaveActive();
     }
     /**
@@ -783,8 +785,8 @@ function () {
       this.keyboardWrapper.classList.remove('hide');
       this.prevIndex = this.currentIndex || 0;
       this.currentIndex = index;
-      this.inputSpans[this.prevIndex].classList.remove('focus');
-      this.inputSpans[this.currentIndex].classList.add('focus');
+      this.inputSpans[this.prevIndex] && this.inputSpans[this.prevIndex].classList.remove('focus');
+      this.inputSpans[this.currentIndex] && this.inputSpans[this.currentIndex].classList.add('focus');
 
       this._generateKeyboard();
 
@@ -1651,10 +1653,16 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAeCAYAAABq
 /* 42 */
 /***/ (function(module, exports) {
 
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTAxNTg5M0UwMjRDMTFFN0EwNThBQjREREUzOEQ0NDUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTAxNTg5M0YwMjRDMTFFN0EwNThBQjREREUzOEQ0NDUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxMDE1ODkzQzAyNEMxMUU3QTA1OEFCNERERTM4RDQ0NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxMDE1ODkzRDAyNEMxMUU3QTA1OEFCNERERTM4RDQ0NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjMOcVgAAAQKSURBVHja1JpbiE1hFMe/c4Y8GF5cxlA07neSMMm4lyiXByMMkSJlRGYolFJDSISaMp4YhBeR+2QYppAZ5DJug5TBOFIuLyT+f+e/a3cyZ86+zDn7rPo9zGXvb6299vq+ddmhyJsy44N0BhPBGNAf5IBOoK3+/gN8Aq/BU3ALVIJGrwu38nBtB7AYLAC9wA1QBc6Dt1Luh/63rYzsDoaC+aAU1INj4DD47EaJkAsPZIMisARcAOXgCvjt8D4ZYApYBKaDo2A7aHByk7BDbxWDB/qZT7IAXHShvNE1l3SPweAnuK81WvttQB9wR+95LlgH3hn/pEH3zNUaXGugXwbMAjdBmVxdb1pO6rXGQXAdzPYaxMvBFjAD3DXJEwb4bXBWwX/QjQErFazjwUuTfKnV2pcV8KVODJgJNoAJ4I1JnfDBTQLXFHNnEjFggN73aSlW3hLqMEe73QtQFy+IuX0dB5vBPRMcoS6bpFvreAaskavKTPDkkHRb29Qr1BWsVz4TVCnU7lRundh2D2wER1p4n/cqr6TjpthcqKMCZJDTXCQFwlzsMegLIpYHmI+cS7LyJ3RIOZX3yngL7K9QgVyTTMkHD8FcF9dS14WWAXwKPUFFCl4Hrn1SOPFGhWqQrmGddFUuU2K/ZK5Db/yWzhO5jY5WtulV/vjkjVCC/88KcGRYNWydST+hzv3ogd7aQr1KKMkGMNHrQw9kgQ9p6IEIdacB7cDXNDTgO3UPm/SWn4yBb6C9Ay/88WlxrzGTSd3pgY+gSxo+feZvX8JWNDu4cJ75f0sw5BCv8m/3pAFPdRYkKjxshoBTKfYAS99nYRUI4xxe3KhkLN/40KB1KdS5hgawS5yn1oVTOZUib2TIgKtWELPSmeLyZpY3kimTTbRV32CdA6wxF6XRDkRdj9kLGhowXeVa0IU6stV52G5ARD2X4jQwoEi6RmLbKiUm2vs/oJgIorBy5FRomPULey7Egn4n2B/gp78P7LI3H2KTub16x5YFUPmlJtp822P/ZWxz95dSBdabNSY68gmCDDfR+VmedDRNecCoOlsBToMeAVC+h3ThsOV57B+bmg+wD9+NJx2YmsKgZtByArrD/Gc2EM8ASqmtfcGBR22SlR8hpbeaOCOm5ioyXrjKROfBy5OoPF9hjmAL4ynfnAcs4fvHZip7mZxYrjYt18HupW2cuw3nY0+auyDRmpiBzblBtYnOcHf7nHZk6553tMaoRJR3YsC/AhpsM9EJPSuqR8qhprpMxTN0bbk83EYnbInWSqyw9vC1SkdlhewS5yjYq/XkXilN/24rwLO0q3ACP1Z7OlNifiNxxMptHHcGfPrchsrxE4HRKvWsz20ybT0c63ObOlWBlTLSk/wVYABaauVRAFIt5wAAAABJRU5ErkJggg=="
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAGCAYAAABThMdSAAAAhUlEQVQ4jWP8don7PwMJYMEWfobWecKkaCEaJPh8ZKhOeku0eiZSLdhwgIdULUSDAIcvJKknyfF3HrMxXL3HTpIFxAIV2V8M2ko/SdJDkuM3HKRhqNuTFuoMDCQ4/t9/BoZNh2jjeCZGBgY/Oxo6/uQVTobnb1hItoAYYK7znUFS5A/J+gBp7x/ey4gCcAAAAABJRU5ErkJggg=="
 
 /***/ }),
 /* 43 */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTAxNTg5M0UwMjRDMTFFN0EwNThBQjREREUzOEQ0NDUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTAxNTg5M0YwMjRDMTFFN0EwNThBQjREREUzOEQ0NDUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxMDE1ODkzQzAyNEMxMUU3QTA1OEFCNERERTM4RDQ0NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxMDE1ODkzRDAyNEMxMUU3QTA1OEFCNERERTM4RDQ0NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjMOcVgAAAQKSURBVHja1JpbiE1hFMe/c4Y8GF5cxlA07neSMMm4lyiXByMMkSJlRGYolFJDSISaMp4YhBeR+2QYppAZ5DJug5TBOFIuLyT+f+e/a3cyZ86+zDn7rPo9zGXvb6299vq+ddmhyJsy44N0BhPBGNAf5IBOoK3+/gN8Aq/BU3ALVIJGrwu38nBtB7AYLAC9wA1QBc6Dt1Luh/63rYzsDoaC+aAU1INj4DD47EaJkAsPZIMisARcAOXgCvjt8D4ZYApYBKaDo2A7aHByk7BDbxWDB/qZT7IAXHShvNE1l3SPweAnuK81WvttQB9wR+95LlgH3hn/pEH3zNUaXGugXwbMAjdBmVxdb1pO6rXGQXAdzPYaxMvBFjAD3DXJEwb4bXBWwX/QjQErFazjwUuTfKnV2pcV8KVODJgJNoAJ4I1JnfDBTQLXFHNnEjFggN73aSlW3hLqMEe73QtQFy+IuX0dB5vBPRMcoS6bpFvreAaskavKTPDkkHRb29Qr1BWsVz4TVCnU7lRundh2D2wER1p4n/cqr6TjpthcqKMCZJDTXCQFwlzsMegLIpYHmI+cS7LyJ3RIOZX3yngL7K9QgVyTTMkHD8FcF9dS14WWAXwKPUFFCl4Hrn1SOPFGhWqQrmGddFUuU2K/ZK5Db/yWzhO5jY5WtulV/vjkjVCC/88KcGRYNWydST+hzv3ogd7aQr1KKMkGMNHrQw9kgQ9p6IEIdacB7cDXNDTgO3UPm/SWn4yBb6C9Ay/88WlxrzGTSd3pgY+gSxo+feZvX8JWNDu4cJ75f0sw5BCv8m/3pAFPdRYkKjxshoBTKfYAS99nYRUI4xxe3KhkLN/40KB1KdS5hgawS5yn1oVTOZUib2TIgKtWELPSmeLyZpY3kimTTbRV32CdA6wxF6XRDkRdj9kLGhowXeVa0IU6stV52G5ARD2X4jQwoEi6RmLbKiUm2vs/oJgIorBy5FRomPULey7Egn4n2B/gp78P7LI3H2KTub16x5YFUPmlJtp822P/ZWxz95dSBdabNSY68gmCDDfR+VmedDRNecCoOlsBToMeAVC+h3ThsOV57B+bmg+wD9+NJx2YmsKgZtByArrD/Gc2EM8ASqmtfcGBR22SlR8hpbeaOCOm5ioyXrjKROfBy5OoPF9hjmAL4ynfnAcs4fvHZip7mZxYrjYt18HupW2cuw3nY0+auyDRmpiBzblBtYnOcHf7nHZk6553tMaoRJR3YsC/AhpsM9EJPSuqR8qhprpMxTN0bbk83EYnbInWSqyw9vC1SkdlhewS5yjYq/XkXilN/24rwLO0q3ACP1Z7OlNifiNxxMptHHcGfPrchsrxE4HRKvWsz20ybT0c63ObOlWBlTLSk/wVYABaauVRAFIt5wAAAABJRU5ErkJggg=="
+
+/***/ }),
+/* 44 */
 /***/ (function(module, exports) {
 
 /*
@@ -1736,7 +1744,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 module.exports = function escape(url) {
@@ -1759,26 +1767,26 @@ module.exports = function escape(url) {
 };
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(44);
-exports = module.exports = __webpack_require__(43)(false);
+var escape = __webpack_require__(45);
+exports = module.exports = __webpack_require__(44)(false);
 // imports
 
 
 // module
-exports.push([module.i, "html {\n  -webkit-tap-highlight-color: transparent;\n}\nhtml body {\n  margin: 0;\n  padding: 0;\n}\n#inputboxWrapper {\n  background-color: #000;\n  background-image: linear-gradient(#273542, #1b242d);\n  box-sizing: border-box;\n  padding: 1.866667rem 0;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  justify-content: normal;\n  align-items: center;\n}\n#inputboxWrapper .container-info {\n  font-family: 'PingFang-SC-Medium';\n  font-size: 0.853333rem /* 16/18.75 */;\n  color: #fff;\n  text-align: center;\n}\n#inputboxWrapper .container-input {\n  margin-top: 1.28rem /* 24/18.75 */;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  height: 2.7rem;\n  width: 86%;\n}\n#inputboxWrapper .container-input span {\n  display: block;\n  text-align: center;\n  line-height: 2.7rem;\n  font-size: 1.068rem;\n  color: #dee5eb;\n  height: 100%;\n  flex: 1;\n  border: 1px solid #afafaf;\n  border-right: 0;\n  box-sizing: border-box;\n}\n#inputboxWrapper .container-input span.focus {\n  border-color: #f6d20b;\n}\n#inputboxWrapper .container-input span.focus + span {\n  border-left-color: #f6d20b;\n}\n#inputboxWrapper .container-input span:first-child {\n  border-radius: 6px 0 0 6px;\n}\n#inputboxWrapper .container-input span:last-child {\n  border-radius: 0px 6px 6px 0px;\n  border-right: 1px solid #afafaf;\n}\n#inputboxWrapper .container-input span:last-child.focus {\n  border-right-color: #f6d20b;\n}\n#inputboxWrapper .container-save-button {\n  width: 90%;\n  height: 2.56rem;\n  margin-top: 2.56rem;\n}\n#inputboxWrapper .container-save-button .btnbind {\n  display: block;\n  width: 100%;\n  height: 100%;\n  text-align: center;\n  line-height: 2.56rem;\n  border-radius: 6px;\n  background-color: #f0e6ac;\n  color: #5c5426;\n  font-size: 0.91rem;\n}\n#inputboxWrapper .container-save-button .btnbind.active {\n  background-color: #f6cf07;\n}\n#inputboxWrapper .container-switch-button {\n  margin-top: 1.92rem;\n  font-size: 0.747rem;\n  line-height: 1.28rem /* 24/18.75 */;\n  color: #ece09b;\n  display: inline-flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n}\n#inputboxWrapper .container-switch-button::before {\n  content: ' ';\n  width: 1.28rem /* 24/18.75 */;\n  height: 1.28rem /* 24/18.75 */;\n  background-image: url(" + escape(__webpack_require__(42)) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n#keyboardWrapper {\n  position: fixed;\n  bottom: 0;\n  background-color: #e0e0e0;\n}\n#keyboardWrapper.hide {\n  display: none;\n}\n#keyboardWrapper .keyboard-row {\n  width: 100vw;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin-bottom: 0.426667rem /* 8/18.75 */;\n}\n#keyboardWrapper .keyboard-row:first-child {\n  justify-content: flex-end;\n  background-color: #fff;\n  margin-top: 0.053333rem /* 1/18.75 */;\n}\n#keyboardWrapper .keyboard-row:first-child span.keyboard-item {\n  margin-right: 15px;\n  color: #f6cf07;\n  font-size: 17px;\n  line-height: 33px;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item {\n  height: 2.133333rem /* 40/18.75 */;\n  border-radius: 5px;\n  color: #2e2e2e;\n  font-size: 0.853333rem /* 16/18.75 */;\n  background-color: #fff;\n  flex: 1;\n  margin-right: 0.213333rem /* 4/18.75 */;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item:first-child {\n  margin-left: 0.213333rem /* 4/18.75 */;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item.keyboard-placeholder {\n  background-color: transparent;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item.keyboard-disable {\n  background-color: #d0d0d0;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item.keyboard-delete {\n  background-color: #aab2bc;\n  background-image: url(" + escape(__webpack_require__(41)) + ");\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: 20px 13px;\n}\n", ""]);
+exports.push([module.i, "html {\n  -webkit-tap-highlight-color: transparent;\n}\nhtml body {\n  margin: 0;\n  padding: 0;\n}\n#inputboxWrapper {\n  background-color: #000;\n  background-image: linear-gradient(#273542, #1b242d);\n  box-sizing: border-box;\n  padding: 1.866667rem 0;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  justify-content: normal;\n  align-items: center;\n}\n#inputboxWrapper .container-info {\n  font-family: 'PingFang-SC-Medium';\n  font-size: 0.853333rem /* 16/18.75 */;\n  color: #fff;\n  text-align: center;\n}\n#inputboxWrapper .container-input {\n  margin-top: 1.28rem /* 24/18.75 */;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  height: 2.7rem;\n  width: 86%;\n}\n#inputboxWrapper .container-input span {\n  display: block;\n  text-align: center;\n  line-height: 2.7rem;\n  font-size: 1.068rem;\n  color: #dee5eb;\n  height: 100%;\n  flex: 1;\n  border: 1px solid #afafaf;\n  border-right: 0;\n  box-sizing: border-box;\n}\n#inputboxWrapper .container-input span.focus {\n  border-color: #f6d20b;\n}\n#inputboxWrapper .container-input span.focus + span {\n  border-left-color: #f6d20b;\n}\n#inputboxWrapper .container-input span:first-child {\n  border-radius: 6px 0 0 6px;\n}\n#inputboxWrapper .container-input span:last-child {\n  border-radius: 0px 6px 6px 0px;\n  border-right: 1px solid #afafaf;\n}\n#inputboxWrapper .container-input span:last-child.focus {\n  border-right-color: #f6d20b;\n}\n#inputboxWrapper .container-save-button {\n  width: 90%;\n  height: 2.56rem;\n  margin-top: 2.56rem;\n}\n#inputboxWrapper .container-save-button .btnbind {\n  display: block;\n  width: 100%;\n  height: 100%;\n  text-align: center;\n  line-height: 2.56rem;\n  border-radius: 6px;\n  background-color: #f0e6ac;\n  color: #5c5426;\n  font-size: 0.91rem;\n}\n#inputboxWrapper .container-save-button .btnbind.active {\n  background-color: #f6cf07;\n}\n#inputboxWrapper .container-switch-button {\n  margin-top: 1.92rem;\n  font-size: 0.747rem;\n  line-height: 1.28rem /* 24/18.75 */;\n  color: #ece09b;\n  display: inline-flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n}\n#inputboxWrapper .container-switch-button::before {\n  content: ' ';\n  width: 1.28rem /* 24/18.75 */;\n  height: 1.28rem /* 24/18.75 */;\n  background-image: url(" + escape(__webpack_require__(43)) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n.bar_bindcarnum {\n  display: block;\n  width: 100%;\n  height: 3px;\n  background-image: url(" + escape(__webpack_require__(42)) + ");\n  background-repeat: repeat-x;\n}\n#keyboardWrapper {\n  position: fixed;\n  bottom: 0;\n  background-color: #e0e0e0;\n}\n#keyboardWrapper.hide {\n  display: none;\n}\n#keyboardWrapper .keyboard-row {\n  width: 100vw;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin-bottom: 0.426667rem /* 8/18.75 */;\n}\n#keyboardWrapper .keyboard-row:first-child {\n  justify-content: flex-end;\n  background-color: #fff;\n  margin-top: 0.053333rem /* 1/18.75 */;\n}\n#keyboardWrapper .keyboard-row:first-child span.keyboard-item {\n  margin-right: 15px;\n  color: #f6cf07;\n  font-size: 17px;\n  line-height: 33px;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item {\n  height: 2.133333rem /* 40/18.75 */;\n  border-radius: 5px;\n  color: #2e2e2e;\n  font-size: 0.853333rem /* 16/18.75 */;\n  background-color: #fff;\n  flex: 1;\n  margin-right: 0.213333rem /* 4/18.75 */;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item:first-child {\n  margin-left: 0.213333rem /* 4/18.75 */;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item.keyboard-placeholder {\n  background-color: transparent;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item.keyboard-disable {\n  background-color: #d0d0d0;\n}\n#keyboardWrapper .keyboard-row:not(:first-child) .keyboard-item.keyboard-delete {\n  background-color: #aab2bc;\n  background-image: url(" + escape(__webpack_require__(41)) + ");\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: 20px 13px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(45);
+var content = __webpack_require__(46);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1799,7 +1807,7 @@ if(content.locals) module.exports = content.locals;
 if(false) {}
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1830,7 +1838,7 @@ module.exports = function fill(value
 };
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 module.exports = function (it) {
@@ -1839,11 +1847,11 @@ module.exports = function (it) {
 };
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // optional / simple context binding
-var aFunction = __webpack_require__(48);
+var aFunction = __webpack_require__(49);
 
 module.exports = function (fn, that, length) {
   aFunction(fn);
@@ -1874,7 +1882,7 @@ module.exports = function (fn, that, length) {
 };
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(1);
@@ -1915,7 +1923,7 @@ __webpack_require__(0).inspectSource = function (it) {
 });
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 module.exports = function (bitmap, value) {
@@ -1928,7 +1936,7 @@ module.exports = function (bitmap, value) {
 };
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.1 ToPrimitive(input [, PreferredType])
@@ -1946,7 +1954,7 @@ module.exports = function (it, S) {
 };
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(2);
@@ -1961,11 +1969,11 @@ module.exports = function (it) {
 };
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = !__webpack_require__(8) && !__webpack_require__(7)(function () {
-  return Object.defineProperty(__webpack_require__(53)('div'), 'a', {
+  return Object.defineProperty(__webpack_require__(54)('div'), 'a', {
     get: function get() {
       return 7;
     }
@@ -1973,7 +1981,7 @@ module.exports = !__webpack_require__(8) && !__webpack_require__(7)(function () 
 });
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(2);
@@ -1984,14 +1992,14 @@ module.exports = function (it) {
 };
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var anObject = __webpack_require__(55);
+var anObject = __webpack_require__(56);
 
-var IE8_DOM_DEFINE = __webpack_require__(54);
+var IE8_DOM_DEFINE = __webpack_require__(55);
 
-var toPrimitive = __webpack_require__(52);
+var toPrimitive = __webpack_require__(53);
 
 var dP = Object.defineProperty;
 exports.f = __webpack_require__(8) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
@@ -2009,23 +2017,23 @@ exports.f = __webpack_require__(8) ? Object.defineProperty : function defineProp
 };
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
 var $export = __webpack_require__(3);
 
 $export($export.P, 'Array', {
-  fill: __webpack_require__(47)
+  fill: __webpack_require__(48)
 });
 
 __webpack_require__(16)('fill');
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(57);
+__webpack_require__(58);
 
 module.exports = __webpack_require__(0).Array.fill;
 
