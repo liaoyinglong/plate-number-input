@@ -1,6 +1,6 @@
 {
-  "name": "plate-number-input",
-  "version": "1.0.6",
+  "name": "ckls",
+  "version": "1.0.7",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --host 0.0.0.0  --port 9090",
     "dev": "webpack-dev-server --mode development --open --port 9090",

@@ -491,7 +491,7 @@ __webpack_require__(59);
 var input = new Array(8).fill(undefined).map(function (item, index) {
   return "<span data-index='".concat(index, "'></span>");
 });
-var layout_inputbox = "\n <div>\n  <div id='inputboxWrapper' class=\"container-top\">\n  <div class='container-info'>\u5B9D\u7ACB\u65B9\u521B\u610F\u4EA7\u4E1A\u56ED(\u5730\u5E93)</div>\n  <div class=\"container-input\">\n      ".concat(input.join(''), "\n  </div>\n  <div class=\"container-save-button\">\n    <span id=\"btnSave\" class=\"btnbind\">{{btnSaveText}}</span>\n  </div>\n  <div  class=\"container-switch-button\">\n    &nbsp;&nbsp;{{switchText}}\n  </div>\n  </div>\n  <span class='bar_bindcarnum'></span>\n </div>\n");
+var layout_inputbox = "\n <div>\n  <div id='inputboxWrapper' class=\"container-top\">\n  <div class='container-info'>\u8BF7\u8F93\u5165\u60A8\u7684\u8F66\u724C</div>\n  <div class=\"container-input\">\n      ".concat(input.join(''), "\n  </div>\n  <div class=\"container-save-button\">\n    <span id=\"btnSave\" class=\"btnbind\">{{btnSaveText}}</span>\n  </div>\n  <div  class=\"container-switch-button\">\n    &nbsp;&nbsp;{{switchText}}\n  </div>\n  </div>\n  <span class='bar_bindcarnum'></span>\n </div>\n");
 var keyboard = [[['确定'], ['粤', '川', '津', '沪', '渝', '蒙', '新', '藏', '宁', '桂'], ['陕', '浙', '晋', '冀', '青', '鲁', '豫', '苏', '皖', '辽'], ['贵', '闽', '赣', '湘', '鄂', '京', '琼', '甘', '云', '黑'], ['吉', '', '', '', '', '', '', '', '', 'delete']], [['确定'], ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'P', '港', '澳'], ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '学'], ['', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '', 'delete']]];
 /* harmony default export */ var layout = ({
   keyboard: keyboard,
