@@ -10,7 +10,6 @@
     "pub": "npm run build &&  npm run changelog && npm run doc && npm publish"
   },
   "main": "dist/plateNumberInput.js",
-  "module": "src/index.js",
   "license": "ISC",
   "dependencies": {
     "@types/core-js": "^0.9.46",
