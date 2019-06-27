@@ -70,14 +70,17 @@ export default class plateNumberInput {
   setNumberType(isNewpower = false) {
     this.isNewpower = isNewpower;
     const lastIndex = this.inputSpans.length - 1;
-    this.spareSpan.innerText = ''
+    this.spareSpan.innerText = '';
     if (!this.spareSpan.parentNode && isNewpower) {
       this.containerInput.appendChild(this.spareSpan);
     }
     if (this.spareSpan.parentNode && !isNewpower) {
       this.containerInput.removeChild(this.spareSpan);
     }
-    const index = this.currentIndex === lastIndex ? this.inputSpans.length - 1 : this.currentIndex;
+    const index =
+      this.currentIndex === lastIndex
+        ? this.inputSpans.length - 1
+        : this.currentIndex;
     this.setInputFocus(index);
     this.setBtnSaveActive();
   }
@@ -137,7 +140,10 @@ export default class plateNumberInput {
   }
   /** 每输入一个字符后调用 */
   next() {
-    const nextIndex = this.currentIndex === this.inputSpans.length - 1 ? this.currentIndex : this.currentIndex + 1;
+    const nextIndex =
+      this.currentIndex === this.inputSpans.length - 1
+        ? this.currentIndex
+        : this.currentIndex + 1;
     this.setInputFocus(nextIndex);
   }
   /** 点击删除按钮后调用 */
@@ -213,7 +219,7 @@ export default class plateNumberInput {
     for (let i = 0; i < this.inputSpans.length; i++) {
       this.inputSpans[i].classList.remove('focus');
     }
-    this.currentIndex = index;    
+    this.currentIndex = index;
     this.inputSpans[index].classList.add('focus');
     this._generateKeyboard();
     this.setBtnSaveActive();
@@ -238,13 +244,17 @@ export default class plateNumberInput {
 
     const generatekey = arr =>
       arr.map(item => {
-        let classList = this.disableRule.includes(item) ? this.disableKeyItemClassName : '';
+        let classList = this.disableRule.includes(item)
+          ? this.disableKeyItemClassName
+          : '';
         // 占位符设置
         if (item === '') {
           classList += this.placeholderClassName;
         }
         if (item === 'delete') classList += this.deleteKeyItemClassName;
-        return `<span class="${this._prefix('item') + classList}" >${item === 'delete' ? '' : item}</span>`;
+        return `<span class="${this._prefix('item') + classList}" >${
+          item === 'delete' ? '' : item
+        }</span>`;
       });
 
     const combinationRow = arr =>
@@ -252,7 +262,9 @@ export default class plateNumberInput {
         let row = generatekey(items).join('');
         return `<div class="${this._prefix('row')}">${row}</div>`;
       });
-    this.keyboardWrapper.innerHTML = combinationRow(currentKeyboard).join('');
+    setTimeout(() => {
+      this.keyboardWrapper.innerHTML = combinationRow(currentKeyboard).join('');
+    }, 80);
   }
   _prefix(str) {
     return ` keyboard-${str} `;
